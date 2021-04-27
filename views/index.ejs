@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Call Phone Tool</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+  <h1 class=" font-weight-bold text-center">Call Phone Tool</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>SĐT</th>
+      <th>Gọi</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0; i<data.length; i++){ %>
+      <tr>
+
+      <th><%= i +1 %></th>
+        <th><%= data[i].numberphone %></th>
+        <th><a href="tel:<%= data[i].numberphone %>"><button type="button" class="btn btn-success">Gọi</button></a></th>
+        <th>
+          <form method="post" id="tableForm" action="getJson">
+          <select name="example" onchange="myFunction(this)" id="<%= data[i].numberphone %>" class="form-control form-control-lg">
+            <option value="1" <%= data[i].status === 1 ? 'selected': '' %> >Chưa gọi</option>
+            <option value="2" <%= data[i].status === 2 ? 'selected': '' %> >Thành công</option>
+            <option value="3" <%= data[i].status === 3 ? 'selected': '' %> >Máy bận</option>
+            <option value="4" <%= data[i].status === 3 ? 'selected': '' %> >Sai số</option>
+          </select>
+            <input type="text" name="numberphone" value="<%= data[i].numberphone %>" class="hide"><br><br>
+            <button class="hide" id='btn<%= data[i].numberphone %>'>Submit</button>
+          </form>
+        </th>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+</body>
+<script>
+  myFunction = (val) => {
+    document.getElementById('btn' + val.getAttribute("id")).click();
+  }
+</script>
+</html>
