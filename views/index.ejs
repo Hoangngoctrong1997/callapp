@@ -26,8 +26,8 @@
       <% for(var i=0; i<data.length; i++){ %>
         <tr>
           <th><%= i +1 %></th>
-          <th><%= data[i].numberphone %></th>
-          <th><a href="tel:<%= data[i].numberphone %>"><button type="button" class="btn btn-success">Gọi</button></a></th>
+          <th>0<%= data[i].numberphone %></th>
+          <th><a href="tel:0<%= data[i].numberphone %>"><button type="button" class="btn btn-success">Gọi</button></a></th>
           <th>
             <form method="post" id="tableForm" action="getJson">
               <select name="example" onchange="myFunction(this)" id="<%= data[i].numberphone %>" class="form-control form-control-lg">
