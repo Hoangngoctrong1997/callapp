@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.get('/', function (req, res) {
-  let status = 1;
+  let status = 2;
   var sql = "SELECT * FROM calltable WHERE status = ?";
   connectDB.query(sql,[status], function(err, results) {
     res.render( 'index', {data:results });
