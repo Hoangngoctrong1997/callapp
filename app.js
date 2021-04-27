@@ -33,13 +33,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.get('/', function (req, res) {
-  var sql = "SELECT * FROM calltable";
-  connectDB.query(sql, function(err, results) {
+  let status = 2;
+  var sql = "SELECT * FROM calltable WHERE status = ?";
+  connectDB.query(sql,[status], function(err, results) {
+    console.log("aaa",results)
     res.render( 'index', {data:results });
   });
 });
+
 app.post('/getJson',function(req,res){
-  console.log(req.body);
   let number = req.body.numberphone;
   let status = req.body.example;
   let sql = `UPDATE calltable SET status = ? WHERE numberphone = ?`;
@@ -47,12 +49,15 @@ app.post('/getJson',function(req,res){
   let data = [status, number];
 
   connectDB.query(sql, data, (error, results, fields) => {
+    console.log(results)
     if (error){
       return console.error(error.message);
+    } if (results) {
+      console.log(1)
+      res.redirect('/')
     }
-    console.log('Rows affected:', results.affectedRows);
   });
-  connectDB.end();
+  // connectDB.end();
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
