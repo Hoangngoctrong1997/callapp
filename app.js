@@ -33,10 +33,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.get('/', function (req, res) {
-  let status = 2;
+  let status = 1;
   var sql = "SELECT * FROM calltable WHERE status = ?";
   connectDB.query(sql,[status], function(err, results) {
-    console.log("aaa",results)
     res.render( 'index', {data:results });
   });
 });
@@ -47,13 +46,12 @@ app.post('/getJson',function(req,res){
   let sql = `UPDATE calltable SET status = ? WHERE numberphone = ?`;
 
   let data = [status, number];
-
+  console.log(data);
   connectDB.query(sql, data, (error, results, fields) => {
     console.log(results)
     if (error){
       return console.error(error.message);
     } if (results) {
-      console.log(1)
       res.redirect('/')
     }
   });

@@ -23,20 +23,18 @@
     </thead>
     <tbody>
     <%if(data.length >0){%>
-      <%%>
       <% for(var i=0; i<data.length; i++){ %>
         <tr>
-
           <th><%= i +1 %></th>
           <th><%= data[i].numberphone %></th>
           <th><a href="tel:<%= data[i].numberphone %>"><button type="button" class="btn btn-success">Gọi</button></a></th>
           <th>
             <form method="post" id="tableForm" action="getJson">
               <select name="example" onchange="myFunction(this)" id="<%= data[i].numberphone %>" class="form-control form-control-lg">
-                <option value="1" <%= data[i].status === 2 ? 'selected': '' %> >Chưa gọi</option>
-                <option value="2" <%= data[i].status === 1 ? 'selected': '' %> >Thành công</option>
+                <option value="1" <%= data[i].status === 1 ? 'selected': '' %> >Chưa gọi</option>
+                <option value="2" <%= data[i].status === 2 ? 'selected': '' %> >Thành công</option>
                 <option value="3" <%= data[i].status === 3 ? 'selected': '' %> >Máy bận</option>
-                <option value="4" <%= data[i].status === 3 ? 'selected': '' %> >Sai số</option>
+                <option value="4" <%= data[i].status === 4 ? 'selected': '' %> >Sai số</option>
               </select>
               <input type="text" name="numberphone" value="<%= data[i].numberphone %>" class="hide"><br><br>
               <button class="hide" id='btn<%= data[i].numberphone %>'>Submit</button>
